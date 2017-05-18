@@ -2,6 +2,8 @@ package main
 
 //import "github.com/jroimartin/gocui"
 import "github.com/nsf/termbox-go"
+import "time"
+import "math/rand"
 
 import (
 	"groggy/world"
@@ -10,6 +12,8 @@ import (
 )
 
 func temporaryInitializeWorld() *world.WorldState {
+	rand.Seed(time.Now().UnixNano())
+
 	playerSymbol := new(model.PrintableEntity)
 	playerSymbol.Glyph = '@'
 
@@ -24,7 +28,7 @@ func temporaryInitializeWorld() *world.WorldState {
 
 	worldState := new (world.WorldState)
 	worldState.PlayerCharacter = player
-	worldState.CurrentLevel = world.GenerateBigEmptyLevel()
+	worldState.CurrentLevel = world.GenerateCavesLevel()
 
 	return worldState
 }

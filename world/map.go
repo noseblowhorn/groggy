@@ -41,7 +41,7 @@ func NewLevel(width int, height int, seedTile *Tile) *Level {
 
 	for i := 0;i < width;i++ {
 		for j := 0;j < height;j++ {
-			tiles[i][j] = seedTile.clone()
+			tiles[i][j] = seedTile
 		}
 	}
 
