@@ -12,19 +12,19 @@ func mainMapProcessInput(worldState *world.WorldState, event termbox.Event) {
 
 	switch event.Key {
 	case termbox.KeyArrowLeft:
-		if player.MapEntity.X > 0 {
+		if level.IsTilePassable(player.MapEntity.X - 1, player.MapEntity.Y) {
 			player.MapEntity.X -= 1
 		}
 	case termbox.KeyArrowRight:
-		if player.MapEntity.X < level.Width - 1 {
+		if level.IsTilePassable(player.MapEntity.X + 1, player.MapEntity.Y) {
 			player.MapEntity.X += 1
 		}
 	case termbox.KeyArrowUp:
-		if player.MapEntity.Y > 0 {
+		if level.IsTilePassable(player.MapEntity.X, player.MapEntity.Y - 1) {
 			player.MapEntity.Y -= 1
 		}
 	case termbox.KeyArrowDown:
-		if player.MapEntity.Y < level.Height - 1 {
+		if level.IsTilePassable(player.MapEntity.X, player.MapEntity.Y + 1) {
 			player.MapEntity.Y += 1
 		}
 	}

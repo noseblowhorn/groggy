@@ -23,6 +23,13 @@ type Level struct {
 	Height int
 }
 
+func (l *Level) IsTilePassable(x, y int) bool {
+	if x < 0 || y < 0 || x > l.Width - 1 || y > l.Height - 1 {
+		return false
+	}
+	return l.Tiles[x][y].Passable
+}
+
 func NewLevel(width int, height int, seedTile *Tile) *Level {
 	l := new(Level)
 	l.Width = width
