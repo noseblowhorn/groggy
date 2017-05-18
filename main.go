@@ -6,10 +6,10 @@ import "github.com/nsf/termbox-go"
 import (
 	"groggy/world"
 	"groggy/model"
-	"groggy/widgets"
+	"groggy/screens"
 )
 
-func main() {
+func temporaryInitializeWorld() *world.WorldState {
 	playerSymbol := new(model.PrintableEntity)
 	playerSymbol.Glyph = '@'
 
@@ -26,43 +26,20 @@ func main() {
 	worldState.PlayerCharacter = player
 	worldState.CurrentLevel = world.GenerateBigEmptyLevel()
 
-	level := worldState.CurrentLevel
+	return worldState
+}
 
+func initializeTermbox() {
 	termbox.Init()
 	termbox.HideCursor()
+}
 
-	for true {
-		widgets.DrawMainMap(0, 2, worldState)
-		widgets.DrawStatusBar(0, 23, worldState)
+func main() {
+	worldState := temporaryInitializeWorld()
 
-		termbox.Flush()
+	initializeTermbox()
 
-		event := termbox.PollEvent()
-
-		if event.Key == termbox.KeyEsc {
-			termbox.HideCursor()
-			break
-		}
-
-		switch event.Key {
-			case termbox.KeyArrowLeft:
-				if player.MapEntity.X > 0 {
-					player.MapEntity.X -= 1
-				}
-			case termbox.KeyArrowRight:
-				if player.MapEntity.X < level.Width - 1 {
-					player.MapEntity.X += 1
-				}
-			case termbox.KeyArrowUp:
-				if player.MapEntity.Y > 0 {
-					player.MapEntity.Y -= 1
-				}
-			case termbox.KeyArrowDown:
-				if player.MapEntity.Y < level.Height - 1 {
-					player.MapEntity.Y += 1
-				}
-		}
-	}
+	screens.MainMapLoop(worldState)
 
 	termbox.Close()
 }
