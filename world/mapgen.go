@@ -48,14 +48,23 @@ func GenerateCavesLevel() *Level {
 	x := 10
 	y := 10
 
+	totalIterations := 0
+
 	for i := 0;; {
+		var dx, dy int
+
 		if (level.Tiles[x][y] == seedTile) {
 			i++
 			level.Tiles[x][y] = floorTile
 		}
 
-		dx := rand.Int() % 3 - 1
-		dy := rand.Int() % 3 - 1
+		if (rand.Int() % 2 == 0) {
+			dx = rand.Int() % 3 - 1
+			dy = 0
+		} else {
+			dx = 0
+			dy = rand.Int() % 3 - 1
+		}
 
 		if (x < 5 && dx == -1) {
 			if (rand.Int() % 100 < (6 - x) * 20) {
@@ -81,7 +90,9 @@ func GenerateCavesLevel() *Level {
 		x += dx
 		y += dy
 
-		if (i > 600) {
+		totalIterations++
+
+		if (i > 600 || totalIterations > 10000) {
 			break
 		}
 	}
