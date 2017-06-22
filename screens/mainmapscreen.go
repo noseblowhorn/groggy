@@ -32,6 +32,10 @@ func mainMapProcessInput(worldState *world.WorldState, event termbox.Event) {
 
 func MainMapLoop(worldState *world.WorldState) {
 	for {
+		worldState.CurrentLevel.CalculateVisibility(
+			worldState.PlayerCharacter.MapEntity.X,
+			worldState.PlayerCharacter.MapEntity.Y)
+
 		widgets.DrawMainMap(0, 2, worldState)
 		widgets.DrawStatusBar(0, 23, worldState)
 
