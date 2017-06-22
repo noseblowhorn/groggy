@@ -7,8 +7,6 @@ type LevelGenerator interface {
 	generate() *Level
 }
 
-
-
 func GenerateBigEmptyLevel() *Level {
 	floorSymbol := new(model.PrintableEntity)
 	floorSymbol.Glyph = '.'
@@ -41,9 +39,6 @@ func GenerateCavesLevel() *Level {
 	floorTile.Glyph = floorSymbol
 
 	level := NewLevel(80, 20, seedTile)
-
-	//x := rand.Int() % 40 + 20
-	//y := rand.Int() % 10 + 5
 
 	x := 10
 	y := 10
